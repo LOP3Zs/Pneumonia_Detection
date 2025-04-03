@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Spering</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='bootstrap.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='responsive.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="hero_area">
+      <!-- header section strats -->
+      <header class="header_section">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" href="index.html">
+              <img
+                src="{{ url_for('static', filename='images/logo.png') }}"
+                alt="Logo"
+              />
+
+              <span> Spering </span>
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.html"
+                    >Home <span class="sr-only">(current)</span></a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about.html"> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="work.html">Work </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="category.html"> Category </a>
+                </li>
+              </ul>
+              <div class="user_option">
+                <a href="">
+                  <span> Login </span>
+                </a>
+                <form
+                  class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0"
+                >
+                  <button
+                    class="btn my-2 my-sm-0 nav_search-btn"
+                    type="submit"
+                  ></button>
+                </form>
+              </div>
+            </div>
+            <div>
+              <div class="custom_menu-btn">
+                <button>
+                  <span class="s-1"> </span>
+                  <span class="s-2"> </span>
+                  <span class="s-3"> </span>
+                </button>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- end header section -->
+      <!-- slider section -->
+      <section class="slider_section">
+        <div
+          id="carouselExampleIndicators"
+          class="carousel slide"
+          data-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-5 offset-md-1">
+                    <div class="detail-box">
+                      <div class="container">
+                        <h1>Pneumonia Prediction</h1>
+                        <form
+                          id="uploadForm"
+                          action="/predict"
+                          method="post"
+                          enctype="multipart/form-data"
+                        >
+                          <label for="ID">ID</label>
+                          <input type="text" id="ID" name="ID" required />
+
+                          <label for="name">First Name:</label>
+                          <input type="text" id="name" name="name" required />
+
+                          <label for="surname">Last Name:</label>
+                          <input
+                            type="text"
+                            id="surname"
+                            name="surname"
+                            required
+                          />
+
+                          <label for="gioi_tinh">Gender:</label>
+                          <select id="gioi_tinh" name="gioi_tinh" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+
+                          <label for="do_tuoi">Age:</label>
+                          <input
+                            type="number"
+                            id="do_tuoi"
+                            name="do_tuoi"
+                            required
+                          />
+
+                          <label for="phone_number">Phone Number:</label>
+                          <input
+                            type="text"
+                            id="phone_number"
+                            name="phone_number"
+                            required
+                          />
+
+                          <label for="city">City:</label>
+                          <input type="text" id="city" name="city" required />
+
+                          <label for="image">Upload Chest X-ray Image:</label>
+                          <div class="upload-box" id="drop-area">
+                            <input
+                              type="file"
+                              id="image"
+                              name="image"
+                              accept="image/*"
+                              required
+                              hidden
+                            />
+                            <p id="drop-text">
+                              🖼️ Drag & Drop or Click to Upload
+                            </p>
+                            <img id="preview" src="" alt="Image Preview" />
+                          </div>
+
+                          <button type="submit">Predict</button>
+                        </form>
+
+                        <div id="result" class="result">
+                          {% if result %}
+                          <h2>Prediction Result: {{ result }}</h2>
+                        {% endif %}
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="offset-md-1 col-md-4 img-container">
+                    <div class="img-box">
+                      <img
+                        src="{{ url_for('static', filename='images/slider-img.png') }}"
+                        alt="Slider"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- end slider section -->
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const dropArea = document.getElementById("drop-area");
+        const imageInput = document.getElementById("image");
+        const previewImage = document.getElementById("preview");
+        const dropText = document.getElementById("drop-text");
+    
+        // Click to upload
+        dropArea.addEventListener("click", function () {
+          imageInput.click();
+        });
+    
+        // Display image preview
+        imageInput.addEventListener("change", function (event) {
+          const file = event.target.files[0];
+    
+          if (file) {
+            const reader = new FileReader();
+    
+            reader.onload = function (e) {
+              previewImage.src = e.target.result;
+              previewImage.style.display = "block";
+              dropText.style.display = "none"; // Hide text
+            };
+    
+            reader.readAsDataURL(file);
+          }
+        });
+    
+        // Drag and Drop functionality
+        dropArea.addEventListener("dragover", function (event) {
+          event.preventDefault();
+          dropArea.style.border = "2px dashed #007bff";
+        });
+    
+        dropArea.addEventListener("dragleave", function () {
+          dropArea.style.border = "2px dashed #ccc";
+        });
+    
+        dropArea.addEventListener("drop", function (event) {
+          event.preventDefault();
+          dropArea.style.border = "2px dashed #ccc";
+    
+          const file = event.dataTransfer.files[0];
+          if (file) {
+            imageInput.files = event.dataTransfer.files;
+    
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              previewImage.src = e.target.result;
+              previewImage.style.display = "block";
+              dropText.style.display = "none";
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      });
+    </script>
+    
+  </body>
+</html>
